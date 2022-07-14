@@ -1,8 +1,9 @@
 import express from "express";
+import {googleAuth} from '@controllers/userAuth'
 const router  =  express.Router();
 
-router.route("/userAuth")
- .get();
+router.route("/userauth/googleOauth")
+ .get(googleAuth);
 
 
 

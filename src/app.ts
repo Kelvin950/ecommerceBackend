@@ -4,12 +4,18 @@ import ErrorHandler from '@middleWares/ErrorHandler';
 import Error404 from '@errors/Error404';
 import "express-async-errors"
 import  {productRoute} from '@productRoutes/create'
-import "dotenv/config"
-const app =  express();
+import {UserRoute} from '@userRoutes/signup'
+import "dotenv/config";
+import cookieParser  from 'cookie-parser';
 
+const app =  express();
+ 
+app.use(cookieParser());
 
 app.use(express.json());
+app.use(express.static("public"));
 app.use(productRoute);
+app.use(UserRoute);
 
 
 app.use(ErrorHandler);
