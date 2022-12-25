@@ -76,7 +76,7 @@ const user =  await User.findOneAndUpdate({email:email} , {name , email} , {upse
 }
 
 
-const simpleAuth =async (req:Request , res:Response) => {
+export const simpleAuth =async (req:Request , res:Response) => {
 
 
     const {name , email ,password, address} =  req.body ;  
