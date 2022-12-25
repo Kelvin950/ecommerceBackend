@@ -4,7 +4,7 @@ import  {IShop} from './interfaces'
 
 interface attrs{
     name:string;
-    Vendor?:Types.ObjectId ,
+    Vendor?:string ,
     address:string,
     
 }

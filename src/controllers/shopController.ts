@@ -2,12 +2,12 @@ import Shop  from "@models/Shop";
 import BadRequestError from "@errors/BadRequestError";
 import{Response , Request} from 'express'
 
-const createShop = async (req:Request,res:Response)=> {
+export const createShop = async (req:Request,res:Response)=> {
  
        const {name , address } =  req.body;  
 
        const shop =  await Shop.createShop(
-        {name  ,address}
+        {name  ,address ,Vendor:req.user.id}
        );
 
         
