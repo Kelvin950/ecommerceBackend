@@ -5,7 +5,8 @@ import  {IShop} from './interfaces'
 interface attrs{
     name:string;
     Vendor:Types.ObjectId ,
-    address:string
+    address:string,
+    
 }
 
 interface ShopModel extends Model<IShop>{
@@ -30,6 +31,11 @@ const shopSchema =  new Schema<IShop , ShopModel>({
 } , {
     timestamps:true
 })  ; 
+
+
+shopSchema.static("createShop" , (attrs:attrs)=>{
+    return new Shop(attrs) ;
+})
 
 
 
