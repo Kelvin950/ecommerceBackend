@@ -1,15 +1,8 @@
 import  {Schema , model , Types , Model} from 'mongoose'; 
+import {Iorder ,Iproductsub} from './interfaces'
 
-interface product{
-    product:Types.ObjectId ;
-    quantity:number;
-}
-interface order {
-   products:product[] ;
-   user:Types.ObjectId;
-}
 
-const productsSchema = new Schema<product>({
+const productsSchema = new Schema<Iproductsub>({
     product:{
         type:Schema.Types.ObjectId ,
         required:true ,
@@ -23,12 +16,15 @@ quantity:{
 
 type orderDocProps = {
     user:Types.ObjectId , 
-    products:Types.DocumentArray<product>
+    products:Types.DocumentArray<Iproductsub>,
+    totalPrice:number ,
+    createdAt:Date
+
 }
 
-type orderModelType = Model<order , {} ,orderDocProps>;
+type orderModelType = Model<Iorder , {} ,orderDocProps>;
 
-const orderSchema =  new Schema<order>({
+const orderSchema =  new Schema<Iorder , orderModelType>({
 
     user:{
         type: Schema.Types.ObjectId  ,
@@ -39,8 +35,15 @@ const orderSchema =  new Schema<order>({
     products:[
        productsSchema
     ]
+     ,
 
-    
+    totalPrice:{
+        type:Number ,
+        required:true
+    } ,
+
+} , {
+    timestamps:true
 });
 
 
