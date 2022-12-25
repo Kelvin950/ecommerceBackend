@@ -16,7 +16,7 @@ interface ShopModel extends Model<IShop>{
 const shopSchema =  new Schema<IShop , ShopModel>({
 
     name:{
-        type:String , required:true
+        type:String , required:true ,unique
     }  ,
     Vendor:{
         type:Schema.Types.ObjectId , required:true , ref:"User"

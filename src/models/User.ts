@@ -16,13 +16,14 @@ interface UserModel extends Model<IUser>{
 
 }
 const userSchema = new Schema<IUser , UserModel>({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
+  name: { type: String, required: true  , unique:true},
+  email: { type: String, required: true , unique:true},
   password:{type:String , required:true} ,
   address:{type:String , required:true} , 
   role:{type:String , enum:["Buyer" , "Admin" , "Vendor"]  ,required:true }, 
   shop:{type:Schema.Types.ObjectId , ref:"Shop"} ,
-  orders:[{type:Schema.Types.ObjectId , ref:"Order"}]
+  orders:[{type:Schema.Types.ObjectId , ref:"Order"}] ,
+  pin:Number
 } , {
   timestamps:true
 });

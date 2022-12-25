@@ -16,7 +16,8 @@ export enum Role{
   password:string;
   address?:string;
   createdAt:Date
-    orders?:Types.DocumentArray<Types.ObjectId>
+    orders?:Types.DocumentArray<Types.ObjectId> ,
+    pin :number
 }
 
 
