@@ -12,9 +12,9 @@ export enum Role{
   name: string;
   email: string;
   role:Role;
-  shop:mongoose.Types.ObjectId;
+  shop?:mongoose.Types.ObjectId;
   password:string;
-  address:string;
+  address?:string;
   createdAt:Date
     orders?:Types.DocumentArray<Types.ObjectId>
 }
@@ -24,7 +24,7 @@ export interface IShop{
 
 name:String ,
 createdAt:Date,
-products:mongoose.Types.DocumentArray<Types.ObjectId>,
+products?:mongoose.Types.DocumentArray<Types.ObjectId>,
 Vendor:Types.ObjectId,
 address:string
 
