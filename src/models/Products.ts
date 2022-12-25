@@ -14,7 +14,7 @@ interface productModel extends Model<Iproduct>{
     createShop(attrs:attrs):Promise<HydratedDocument<Iproduct>>
 }
 
-const productSchema = new Schema<Iproduct>({
+const productSchema = new Schema<Iproduct , productModel>({
   title: {
     type: String,
     required: true,
@@ -33,4 +33,8 @@ const productSchema = new Schema<Iproduct>({
 
 
 
-export default model<Iproduct>("Product", productSchema);
+productSchema.static("createProduct" , (attrs:attrs)=>{
+    return new  Product(attrs) ; 
+})
+const Product = model<Iproduct , productModel>("Product", productSchema);
+export default Product ; 
