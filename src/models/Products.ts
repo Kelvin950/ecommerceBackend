@@ -11,7 +11,7 @@ interface attrs{
 
 interface productModel extends Model<Iproduct>{
 
-    createShop(attrs:attrs):Promise<HydratedDocument<Iproduct>>
+    createProduct(attrs:attrs):Promise<HydratedDocument<Iproduct>>
 }
 
 const productSchema = new Schema<Iproduct , productModel>({
