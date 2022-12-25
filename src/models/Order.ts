@@ -6,6 +6,7 @@ const productsSchema = new Schema<Iproductsub>({
     product:{
         type:Schema.Types.ObjectId ,
         required:true ,
+        ref:"Product"
     }
      , 
 quantity:{
