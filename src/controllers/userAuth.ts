@@ -3,6 +3,8 @@ import axios from 'axios';
 import qs from 'qs';
 import User from '@models/User';
 import createToken from '@helpers/Auth/Auth';
+import  bcrypt from   'bcrypt';
+import {Role} from '@models/interfaces'
 interface GoogleAuth{
     access_token:string ,
     expires_in:number ,
@@ -79,10 +81,18 @@ const simpleAuth =async (req:Request , res:Response) => {
 
     const {name , email ,password, address} =  req.body ;  
            
-         
-       const  hashPassword =  
+        const salt  =  await bcrypt.genSalt(10);
+      const hashpass =  await bcrypt.hash(password , salt) ;
+       
+
+      const user =  await  User.createUser({
+        name , email , password:hashpass , address ,role:Role.Buyer 
+      }) ;
 
 
+      res.send(201).send({
+        message:"done" , data:user
+      })
 
     
 }
