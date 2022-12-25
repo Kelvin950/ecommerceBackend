@@ -3,15 +3,9 @@ import jwt from  'jsonwebtoken';
 import  AuthError from '@errors/AuthError';
 import { verify } from 'crypto';
 import { nextTick } from 'process';
+import { Payload  } from '../severInterface';
 
 
-interface Payload{
-
-    email:string ,
-    name:string,
-    id:string
-
-}
 declare global{
     namespace Express{
         interface  Request{

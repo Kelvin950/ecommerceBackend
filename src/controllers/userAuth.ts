@@ -6,6 +6,8 @@ import createToken from '@helpers/Auth/Auth';
 import  bcrypt from   'bcrypt';
 import {Role} from '@models/interfaces'
 import BadRequestError from '@errors/BadRequestError';
+import AuthError from '@errors/AuthError';
+import jwt from 'jsonwebtoken'
 interface GoogleAuth{
     access_token:string ,
     expires_in:number ,
@@ -77,14 +79,18 @@ const user =  await User.findOneAndUpdate({email:email} , {name , email} , {upse
 }
 
 
-export const simpleAuth =async (req:Request , res:Response) => {
+export const signup=async (req:Request , res:Response) => {
 
 
     const {name , email ,password, address} =  req.body ;  
            
-              
+                      
+      const isname = await User.findOne(name);
+      if (!isname) {
+        throw new BadRequestError("Bad input or name in used");
+      }   
       const isemail = await User.findOne(email);
-      if (isemail) {
+      if (!isemail) {
         throw new BadRequestError("Bad input or email in used");
       } 
 
@@ -102,4 +108,32 @@ export const simpleAuth =async (req:Request , res:Response) => {
       })
 
     
+}
+
+export const login = async (req:Request,res:Response )=>{
+
+       
+    const {email , password} =  req.body ;
+
+    const user = await User.findOne(email);
+    if(!user){
+        throw new AuthError("email or password incorrect");
+
+    }
+
+    const hashpassword =  await bcrypt.compare(password , user.password) ;
+     if(!hashpassword)
+        throw new AuthError("email or password incorrecct");
+
+    
+    const token = jwt.sign({email:user.email , name:user.name ,id:user.id} , process.env.JWTSECRET! ,{expiresIn:"ihr"}); 
+
+    res.status(200).send({
+        message:"done" ,
+        data:{
+            user ,
+            token
+        }
+    })
+
 }
