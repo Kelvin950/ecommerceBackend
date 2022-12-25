@@ -1,7 +1,7 @@
 
 import mongoose, { Types } from "mongoose";
 
-enum Role{
+export enum Role{
    
     Buyer="Buyer" , 
     Admin =  "Admin",
@@ -16,7 +16,7 @@ enum Role{
   password:string;
   address:string;
   createdAt:Date
-    orders:Types.DocumentArray<Types.ObjectId>
+    orders?:Types.DocumentArray<Types.ObjectId>
 }
 
 

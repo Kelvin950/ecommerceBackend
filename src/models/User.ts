@@ -1,11 +1,21 @@
-import { Schema, model  } from 'mongoose';
-import {IUser} from './interfaces'
-
-// 1. Create an interface representing a document in MongoDB.
+import { Schema, Model  , HydratedDocument ,model } from 'mongoose';
+import {IUser, Role} from './interfaces'
 
 
-// 2. Create a Schema corresponding to the document interface.
-const userSchema = new Schema<IUser>({
+interface Attrs{
+  name:string ,
+  email:string ,
+  password:string  ,
+  address?:string ,
+  role:Role
+}
+interface UserModel extends Model<IUser>{
+
+   createUser(attrs:Attrs):Promise<HydratedDocument<IUser>>
+
+
+}
+const userSchema = new Schema<IUser , UserModel>({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password:{type:String , required:true} ,
@@ -17,5 +27,10 @@ const userSchema = new Schema<IUser>({
   timestamps:true
 });
 
+userSchema.static("createUser" , (attrs:Attrs)=>{
+  return new User(attrs);
+} )
+
 // 3. Create a Model.
-export default model<IUser>('User', userSchema);
+ const User =  model<IUser , UserModel>('User', userSchema);
+ export default User;

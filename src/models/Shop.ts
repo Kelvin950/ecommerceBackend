@@ -1,7 +1,18 @@
-import mongoose, {mongo, Schema , Types} from  'mongoose'
+import mongoose, {HydratedDocument, Model, mongo, Schema , Types} from  'mongoose'
 import  {IShop} from './interfaces'
 
-const shopSchema =  new Schema<IShop>({
+
+interface attrs{
+    name:string;
+    Vendor:Types.ObjectId ,
+    address:string
+}
+
+interface ShopModel extends Model<IShop>{
+    
+    createShop(attrs:attrs):Promise<HydratedDocument<IShop>>
+}
+const shopSchema =  new Schema<IShop , ShopModel>({
 
     name:{
         type:String , required:true
@@ -22,5 +33,5 @@ const shopSchema =  new Schema<IShop>({
 
 
 
-const Shop =  mongoose.model<IShop>("Shop" ,shopSchema );
+const Shop =  mongoose.model<IShop , ShopModel>("Shop" ,shopSchema );
 export default Shop;
