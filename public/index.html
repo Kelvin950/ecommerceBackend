@@ -26,7 +26,7 @@ function getGoogleOAuth(){
     const rootUrl =  "https://accounts.google.com/o/oauth2/v2/auth";
     const options = {
   redirect_uri: "http://localhost:3000/userauth/googleOauth" ,
-  googleusercontent.com" ,
+  client_id:"477099634779-j9mlarioe4s2eao5k91kfgkejlvg6bnf.apps.googleusercontent.com" ,
   access_type:"offline" ,
   response_type:"code" ,
   prompt:"consent", 
@@ -38,7 +38,7 @@ function getGoogleOAuth(){
   
     const qs =  new URLSearchParams(options);
     console.log(rootUrl);
-    location.replace(`${rootUrl}?${qs.toString()}`) ;
+    return `${rootUrl}?${qs.toString()}`;
 
 }
 

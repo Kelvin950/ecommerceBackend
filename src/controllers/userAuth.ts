@@ -29,19 +29,19 @@ export const googleAuth=async(
 
     //get the  code from  query string
     const code =  req.query.code as string ;
-
+console.log(code);
     //get the id and access token with the code
 const values = {
     code ,
-    client_id:process.env.GOOGLE_CLIENTID  ,
-    client_secret:process.env.GOOGLE_CLIENTSECRET ,
-    redirect_uri:process.env.GOOGLEREDIRECTURL,
+    client_id:process.env.GOOGLE_CLIENTID!  ,
+    client_secret:process.env.GOOGLE_CLIENTSECRET! ,
+    redirect_uri:process.env.GOOGLEREDIRECTURL!,
     grant_type: "authorization_code"
 } ;
  
 const {data:{access_token , id_token}}=  await axios.post<GoogleAuth>("https://oauth2.googleapis.com/token" ,qs.stringify(values) ,  {
     headers:{
-        "Content-Type" : "application/x-www-form-urlencoded"
+        "Content-Type":"application/x-www-form-urlencoded"
     } 
 }) ;
 // console.log(response.data.id_token);
@@ -62,10 +62,13 @@ const user =  await User.findOneAndUpdate({email:email} , {name , email} , {upse
     //create a session
 
     //create access and refresh token
-//   res.cookie("refreshToken" ,createToken.createRefreshToken({userID:user.id , email:email}) ,{httpOnly:true}) ; 
+  res.cookie("refreshToken" ,createToken.createRefreshToken({userID:user.id , email:email}) ,{httpOnly:true}) ; 
           
 
 
     //set coookies and redirect back to client
-    res.status(200).send(user);
+    res.status(200).send({
+        accessToken:createToken.createAccessToken({userID:user.id , email:email})
+    })
+  
 }
