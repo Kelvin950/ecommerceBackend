@@ -1,5 +1,6 @@
 import { Schema, model  } from 'mongoose';
 import {IUser} from './interfaces'
+
 // 1. Create an interface representing a document in MongoDB.
 
 
@@ -10,8 +11,8 @@ const userSchema = new Schema<IUser>({
   password:{type:String , required:true} ,
   address:{type:String , required:true} , 
   role:{type:String , enum:["Buyer" , "Admin" , "Vendor"]  ,required:true }, 
-  shop:{type:Schema.Types.ObjectId , ref:"Shop"}
- 
+  shop:{type:Schema.Types.ObjectId , ref:"Shop"} ,
+  orders:[{type:Schema.Types.ObjectId , ref:"Order"}]
 } , {
   timestamps:true
 });
