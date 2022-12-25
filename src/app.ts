@@ -4,7 +4,8 @@ import ErrorHandler from '@middleWares/ErrorHandler';
 import Error404 from '@errors/Error404';
 import "express-async-errors"
 import  {productRoute} from '@productRoutes/create'
-import {UserRoute} from '@userRoutes/signup'
+import authRoute from '@userRoutes/index';
+import shopRoute from '@shopRoutes/shop';
 import "dotenv/config";
 import cookieParser  from 'cookie-parser';
 // import isAuth from '@middleWares/ISAuth';
@@ -46,7 +47,8 @@ res.status(200).send({accessToken:Auth.createAccessToken({userID:payload.userID 
 
 });
 app.use(productRoute);
-app.use(UserRoute);
+app.use(authRoute);
+app.use(shopRoute);
 
 
 app.use(ErrorHandler);
