@@ -5,6 +5,7 @@ import User from '@models/User';
 import createToken from '@helpers/Auth/Auth';
 import  bcrypt from   'bcrypt';
 import {Role} from '@models/interfaces'
+import BadRequestError from '@errors/BadRequestError';
 interface GoogleAuth{
     access_token:string ,
     expires_in:number ,
@@ -81,15 +82,21 @@ export const simpleAuth =async (req:Request , res:Response) => {
 
     const {name , email ,password, address} =  req.body ;  
            
+              
+      const isemail = await User.findOne(email);
+      if (isemail) {
+        throw new BadRequestError("Bad input or email in used");
+      } 
+
         const salt  =  await bcrypt.genSalt(10);
       const hashpass =  await bcrypt.hash(password , salt) ;
-       
+  
 
       const user =  await  User.createUser({
         name , email , password:hashpass , address ,role:Role.Buyer 
-      }) ;
+      }) ; 
 
-
+        
       res.send(201).send({
         message:"done" , data:user
       })
