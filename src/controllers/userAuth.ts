@@ -103,7 +103,7 @@ export const signup=async (req:Request , res:Response) => {
         name , email , password:hashpass , address ,role:Role.Buyer 
       }) ; 
 
-      user.shop = user.id;
+    //   user.shop = user.id;
         
       await user.save()
         
