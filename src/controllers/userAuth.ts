@@ -85,12 +85,13 @@ export const signup=async (req:Request , res:Response) => {
     const {name , email ,password, address} =  req.body ;  
            
                       
-      const isname = await User.findOne(name);
-      if (!isname) {
+      const isname = await User.findOne({name});
+    //   console.log(isname)
+      if (isname) {
         throw new BadRequestError("Bad input or name in used");
       }   
-      const isemail = await User.findOne(email);
-      if (!isemail) {
+      const isemail = await User.findOne({email});
+      if (isemail) {
         throw new BadRequestError("Bad input or email in used");
       } 
 
@@ -102,8 +103,11 @@ export const signup=async (req:Request , res:Response) => {
         name , email , password:hashpass , address ,role:Role.Buyer 
       }) ; 
 
+      user.shop = user.id;
         
-      res.send(201).send({
+      await user.save()
+        
+      res.status(201).send({
         message:"done" , data:user
       })
 
@@ -115,7 +119,7 @@ export const login = async (req:Request,res:Response )=>{
        
     const {email , password} =  req.body ;
 
-    const user = await User.findOne(email);
+    const user = await User.findOne({email});
     if(!user){
         throw new AuthError("email or password incorrect");
 
@@ -126,7 +130,7 @@ export const login = async (req:Request,res:Response )=>{
         throw new AuthError("email or password incorrecct");
 
     
-    const token = jwt.sign({email:user.email , name:user.name ,id:user.id} , process.env.JWTSECRET! ,{expiresIn:"ihr"}); 
+    const token = jwt.sign({email:user.email , name:user.name ,id:user.id} , process.env.JWTSECRET! ,{expiresIn:"1hr"}); 
 
     res.status(200).send({
         message:"done" ,

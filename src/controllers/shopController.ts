@@ -14,6 +14,8 @@ export const createShop = async (req:Request,res:Response)=> {
         {name  ,address ,Vendor:req.user.id}
        );
 
+
+       await shop.save();
         
        res.status(200).send({
         message:"done" ,
@@ -25,5 +27,12 @@ export const createShop = async (req:Request,res:Response)=> {
 
 
     
+}
+
+export const requestForShop =async (req:Request, res:Response) => {
+        
+
+      
+
 }
 
