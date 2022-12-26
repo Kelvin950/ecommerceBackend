@@ -42,8 +42,8 @@ export const requestForShop =async (req:Request, res:Response) => {
                 throw new BadRequestError("Already owns a shop");
 
     
-    const isRequest = await RequestModel.findOne({User:req.user.id}) ;
-
+    const isRequest = await RequestModel.findOne({user:req.user.id}) ;
+console.log(isRequest);
     if(isRequest)
         throw new BadRequestError("You have already asked for a shop");
     
@@ -53,7 +53,13 @@ export const requestForShop =async (req:Request, res:Response) => {
 
     await request.save();
       
-
+ sendEmail({
+   to: "test@example.com", // Change to your recipient
+   from: "test@example.com", // Change to your verified sender
+   subject: "Sending with SendGrid is Fun",
+   text: "and easy to do anywhere, even with Node.js",
+   html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+ });
     res.status(201).send({
         message:"done" ,data:{
             request:"request sent"

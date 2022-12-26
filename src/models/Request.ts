@@ -4,8 +4,8 @@ import {Request} from './interfaces';
 
 const requestSchema =  new Schema<Request>({
 
-    User:{
-        type:Schema.Types.ObjectId , ref:"User"
+    user:{
+        type:Schema.Types.ObjectId , ref:"User", required:true
     } ,
 
 
@@ -17,4 +17,4 @@ const requestSchema =  new Schema<Request>({
 
 
 
-export default model("Request" , requestSchema);
+export default model<Request>("Request" , requestSchema);
