@@ -6,11 +6,11 @@ import {createShop ,requestForShop} from '@controllers/shopController'
 
 const router=  Router(); 
 
-router.route("/createshop")
+router.route("/shop/createshop")
 .post([body("name").isAlpha().notEmpty() , body("address").notEmpty()] , Validation , ISAuth.isAuth ,createShop ) 
 
 
-router.route("/request")
+router.route("/shop/request")
 .get(ISAuth.isAuth ,requestForShop);
 
 export default router;

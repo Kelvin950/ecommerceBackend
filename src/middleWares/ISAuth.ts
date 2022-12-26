@@ -21,9 +21,9 @@ export default {
  isAuth :async (req:Request ,res:Response ,next:NextFunction)=>{
         
      const headers  = req.headers.authorization!; 
-
+// console.log(headers);
     const  [_ , token] =  headers.split(" "); 
-
+// console.log(token);
     if(!token){
         throw new AuthError("not logged in");
     }
