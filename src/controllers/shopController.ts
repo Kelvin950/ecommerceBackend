@@ -37,22 +37,22 @@ export const requestForShop =async (req:Request, res:Response) => {
         
 
         
-//     const user =  await User.findById(req.user.id);
+    const user =  await User.findById(req.user.id);
 
-//      if(user?.shop)
-//                 throw new BadRequestError("Already owns a shop");
+     if(user?.shop)
+                throw new BadRequestError("Already owns a shop");
 
     
-//     const isRequest = await RequestModel.findOne({user:req.user.id}) ;
-// console.log(isRequest);
-//     if(isRequest)
-//         throw new BadRequestError("You have already asked for a shop");
+    const isRequest = await RequestModel.findOne({user:req.user.id}) ;
+console.log(isRequest);
+    if(isRequest)
+        throw new BadRequestError("You have already asked for a shop");
     
-//     const request=  await RequestModel.create({
-//         user:req.user.id 
-//     }) ;
+    const request=  await RequestModel.create({
+        user:req.user.id 
+    }) ;
 
-//     await request.save();
+    await request.save();
       
  sendEmail({
    to: req.user.email, // Change to your recipient
