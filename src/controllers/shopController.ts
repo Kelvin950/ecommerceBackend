@@ -61,7 +61,7 @@ export const requestForShop =async (req:Request, res:Response) => {
       html: "<strong>and easy to do anywhere, even with Node.js</strong>",
     });
 
-    res.status(200).send({
+    res.status(201).send({
         message:"done" ,data:{
             request:"request sent"
         }
