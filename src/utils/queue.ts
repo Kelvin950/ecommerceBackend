@@ -7,8 +7,9 @@ const emailQueue =  new bull("email",{
 
 emailQueue.process(processes);
 
+
 export const sendEmail =(data:any)=>{
 
-
+console.log("function")
     emailQueue.add(data);
 }

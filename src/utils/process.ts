@@ -1,6 +1,6 @@
-import * as sgMail from '@sendgrid/mail'
+import sgMail from '@sendgrid/mail'
 export  const processes = async(job:any)=>{
-
+console.log("ds")
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 // const msg = {
 //   to: "test@example.com", // Change to your recipient
@@ -9,12 +9,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 //   text: "and easy to do anywhere, even with Node.js",
 //   html: "<strong>and easy to do anywhere, even with Node.js</strong>",
 // };
-sgMail
-  .send(job.data)
-  .then(() => {
-    console.log("Email sent");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
+await sgMail.send(job.data)
+
 } ;
