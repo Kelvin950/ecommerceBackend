@@ -3,7 +3,7 @@ import {body} from 'express-validator';
 import Validation from '@middleWares/validationError';
 import ISAuth from '@middleWares/ISAuth';
 import {createShop ,requestForShop} from '@controllers/shopController'
-
+import { emailLimiter } from "@utils/limiter";
 const router=  Router(); 
 
 router.route("/shop/createshop")
@@ -11,6 +11,6 @@ router.route("/shop/createshop")
 
 
 router.route("/shop/request")
-.get(ISAuth.isAuth ,requestForShop);
+.get( emailLimiter,ISAuth.isAuth , requestForShop);
 
 export default router;
