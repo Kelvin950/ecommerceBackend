@@ -21,6 +21,11 @@ export enum Role{
 }
 
 
+export interface Request{
+
+    User:Types.ObjectId ,
+    createdAt:Date
+}
 export interface IShop{
 
 name:String ,
