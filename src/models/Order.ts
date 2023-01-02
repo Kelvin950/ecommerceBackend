@@ -29,7 +29,8 @@ const orderSchema =  new Schema<Iorder , orderModelType>({
 
     user:{
         type: Schema.Types.ObjectId  ,
-        ref:"User"
+        ref:"User",
+        required:true
     } ,
 
 
