@@ -4,7 +4,7 @@ import User from '@models/User';
 import RequestModel from '@models/Request';
 import {sendEmail} from '@utils/queue'
 import{Response , Request} from 'express'
-
+import {Iproduct} from '@models/interfaces'
 
 export const createShop = async (req:Request,res:Response)=> {
  
@@ -69,3 +69,21 @@ console.log(isRequest);
        
 }
 
+
+export const viewShop = async(req:Request,res:Response)=>{
+ 
+    const shop = await Shop.findOne({Vendor:req.user.id}).populate<Iproduct[]>("products");
+    if(!shop){
+        throw new BadRequestError("User does not own a shop");
+    }
+        
+      
+    res.status(200);
+    res.send({message:"done" ,data:shop})
+
+
+     
+
+
+    
+}
