@@ -25,7 +25,7 @@ const shopSchema =  new Schema<IShop , ShopModel>({
         type:String , required:true
     } ,
     products:[
-        {type:Schema.Types.ObjectId , required:true ,ref:"Product"} 
+        {type:Schema.Types.ObjectId,ref:"Product"} 
     ]
 
 } , {

@@ -1,14 +1,22 @@
 import Shop  from "@models/Shop";
 import BadRequestError from "@errors/BadRequestError";
+import AuthError from "@errors/AuthError";
 import User from '@models/User';
 import RequestModel from '@models/Request';
 import {sendEmail} from '@utils/queue'
 import{Response , Request} from 'express'
-import {Iproduct} from '@models/interfaces'
+import {Iproduct ,IUser ,Role} from '@models/interfaces'
 
 export const createShop = async (req:Request,res:Response)=> {
  
        const {name , address } =  req.body;  
+      const user = await User.findById(req.user.id); 
+      if(user?.role !== Role.Buyer){
+           throw  new AuthError("You are not a vendor");
+         
+      } 
+      
+
 
        const isshop =  await Shop.findOne(name);
        if(!isshop){
@@ -18,8 +26,10 @@ export const createShop = async (req:Request,res:Response)=> {
         {name  ,address ,Vendor:req.user.id}
        );
 
-
+                
        await shop.save();
+
+       user.set("Shop" , shop.id );
         
        res.status(200).send({
         message:"done" ,
@@ -87,3 +97,19 @@ export const viewShop = async(req:Request,res:Response)=>{
 
     
 }
+
+export const viewShopById = async(req:Request , res:Response)=>{
+ 
+    const shop =  await Shop.findById(req.params.shopId).populate<Iproduct[]>("products").populate<IUser>("Vendor");
+    if(!shop){
+        throw new BadRequestError("shop does not exist");
+    
+     } 
+
+
+     res.status(200).send({message:"done" , data:shop});
+      
+    
+
+    }
+

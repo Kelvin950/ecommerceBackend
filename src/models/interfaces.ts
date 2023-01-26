@@ -41,6 +41,8 @@ export interface Iproduct {
   price: string;
   description: string;
   image: string;
+  Vendor:Types.ObjectId,
+  Shop:Types.ObjectId
 }
 
 export interface Iproductsub {

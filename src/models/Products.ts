@@ -29,7 +29,11 @@ const productSchema = new Schema<Iproduct , productModel>({
   },
 
   image: String,
-});
+
+  Vendor:{type:Schema.Types.ObjectId  ,ref:"User" ,required:true} , 
+   
+  Shop:{type:Schema.Types.ObjectId ,ref:"Shop" , required:true}
+}); 
 
 
 

@@ -1,10 +1,23 @@
 import {Request , Response}  from 'express' ;
 import  Product from '@models/Products';
-import BadRequestError from '@errors/BadRequestError'
+import BadRequestError from '@errors/BadRequestError';
+import User from '@models/User'
+import Shop from '@models/Shop';
 const createProduct = async  (req:Request , res:Response)=>{
 
+   const user =  await User.findById(req.user.id);
+   if(!user?.shop){
+    throw new BadRequestError("you do not own a shop");
+   }
+
+   const shop  = await Shop.findOne({Vendor:req.user}) ;
+      const product =  await  Product.create({...req.body , Vendor:user.id , Shop:user.shop.id});
  
-   const product =  await  Product.create(req.body);
+      shop?.products?.push(product); 
+
+      await shop?.save();
+        
+
 
     return res.status(201).send(product);
        
