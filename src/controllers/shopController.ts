@@ -16,10 +16,14 @@ export const createShop = async (req:Request,res:Response)=> {
          
       } 
       
+      if(user.shop){
+        throw new AuthError("You already own a shop");
+      }
 
 
-       const isshop =  await Shop.findOne(name);
-       if(!isshop){
+
+       const isshop =  await Shop.findOne({name:name});
+       if(isshop){
         throw new BadRequestError("shop incorrect or already exists");
        }
        const shop =  await Shop.createShop(
@@ -29,7 +33,6 @@ export const createShop = async (req:Request,res:Response)=> {
                 
        await shop.save();
 
-    //    user.set("Shop" , shop.id );
         
        res.status(200).send({
         message:"done" ,
