@@ -5,7 +5,8 @@ import {body} from 'express-validator';
 const router =  express.Router() ;
 
 router.route("/product")
-.post( [body("title").notEmpty().isAlphanumeric().trim() , body("price").notEmpty().isNumeric().trim() , body("description").notEmpty().isAlphanumeric().isLength({min:15}) , body("image").notEmpty()] , validationError ,createProduct)
+.post( [body("title").notEmpty().
+trim() , body("price").notEmpty().isNumeric().trim() , body("description").notEmpty().isLength({min:15}) , body("image").notEmpty()] , validationError ,createProduct)
 .delete(deleteProducts)
 .get(getProducts)
 
