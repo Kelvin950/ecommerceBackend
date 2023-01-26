@@ -29,7 +29,7 @@ export const createShop = async (req:Request,res:Response)=> {
                 
        await shop.save();
 
-       user.set("Shop" , shop.id );
+    //    user.set("Shop" , shop.id );
         
        res.status(200).send({
         message:"done" ,
