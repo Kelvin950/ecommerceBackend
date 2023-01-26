@@ -8,9 +8,7 @@ const Port  =  3001 || process.env.Port;
       throw new Error("no uri");
     }
     console.log(process.env.MONGO_URI!);
-    const connect = await mongoose.connect(
-      "mongodb://localhost:27017/ecommerce"
-    );
+    const connect = await mongoose.connect(process.env.MONGO_URI);
  
     console.log(connect.connection.host);
 
