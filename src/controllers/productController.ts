@@ -10,8 +10,8 @@ const createProduct = async  (req:Request , res:Response)=>{
     throw new BadRequestError("you do not own a shop");
    }
 
-   const shop  = await Shop.findOne({Vendor:req.user}) ;
-      const product =  await  Product.create({...req.body , Vendor:user.id , Shop:user.shop.id});
+   const shop  = await Shop.findOne({Vendor:req.user.id}) ;
+      const product =  await  Product.create({...req.body , Vendor:user.id , Shop:user.shop.id.toString()});
  
       shop?.products?.push(product); 
 
