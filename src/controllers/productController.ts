@@ -3,6 +3,7 @@ import  Product from '@models/Products';
 import BadRequestError from '@errors/BadRequestError';
 import User from '@models/User'
 import Shop from '@models/Shop';
+import {IShop,IUser} from '@models/interfaces'
 const createProduct = async  (req:Request , res:Response)=>{
 
    const user =  await User.findById(req.user.id);
@@ -11,7 +12,7 @@ const createProduct = async  (req:Request , res:Response)=>{
    }
 
    const shop  = await Shop.findOne({Vendor:req.user.id}) ;
-      const product =  await  Product.create({...req.body , Vendor:user.id , Shop:user.shop.id.toString()});
+      const product =  await  Product.create({...req.body , Vendor:user.id , Shop:shop?.id});
  
       shop?.products?.push(product); 
 
@@ -26,7 +27,7 @@ const createProduct = async  (req:Request , res:Response)=>{
 
 const getProducts =  async(req:Request , res:Response)=>{
 
-    const products =  await Product.find();
+    const products =  await Product.find().populate<IShop>("Shop").populate<IUser>("Vendor");
  
     return res.status(200).send(products);
 
@@ -34,7 +35,7 @@ const getProducts =  async(req:Request , res:Response)=>{
 
 const getProduct = async(req:Request,res:Response)=>{
 
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate<IShop>("Shop").populate<IUser>("Vendor");
     if(!product){
         throw new BadRequestError("product not found");
     }
