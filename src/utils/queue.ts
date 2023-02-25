@@ -1,15 +1,15 @@
-import bull from "bull";
-import {processes} from './process';
+// import bull from "bull";
+// import {processes} from './process';
 
-const emailQueue =  new bull("email",{
-    redis:process.env.redis_url!
-}) ;
+// const emailQueue =  new bull("email",{
+//     redis:process.env.redis_url!
+// }) ;
 
-emailQueue.process(processes);
+// emailQueue.process(processes);
 
 
-export const sendEmail =(data:any)=>{
+// export const sendEmail =(data:any)=>{
 
-console.log("function")
-    emailQueue.add(data);
-}
+// console.log("function")
+//     emailQueue.add(data);
+// }
