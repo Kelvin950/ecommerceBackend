@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import {app} from './src/app'
-const Port  =  3001 || process.env.Port;
+const Port  =  process.env.Port || 3001;
 
 (async () => {
   try {

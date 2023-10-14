@@ -14,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import User from '@models/User';
 import AuthError from '@errors/AuthError';
 import  cors from 'cors';
+import morgan from "morgan"
 const app =  express();
  
 app.use(cookieParser());
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use(cors());
+app.use(morgan("dev"))
 app.use("/refreshToken" , async (req:Request , res:Response)=>{
 
     const {refreshToken} =  req.cookies ; 
