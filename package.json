@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test && npx jest",
     "dev": "nodemon server.ts",
-    "start": "ts-node server.ts"
+    "start": "ts-node server.ts" ,
+    "build" :"tsc"
   },
   "keywords": [],
   "author": "",

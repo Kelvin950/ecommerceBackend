@@ -1,3 +1,5 @@
 {
-    "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/39ab34d5-f5d0-443c-9b9b-f43d44892e13/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/ecommercew",
+  "appService.deploySubpath": "."
 }
