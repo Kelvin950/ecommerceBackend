@@ -3,3 +3,7 @@ node_modules
 ecommerce.pem
 .dockerignore
 dist
+terraform/.terraform
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate.backup7
+terraform/terraform.tfstate
