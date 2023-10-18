@@ -17,7 +17,10 @@
       ],
       "essential": true,
       "environment": [],
-      "environmentFiles": [],
+      "environmentFiles": [{
+        "name":"MONGO_URI" , 
+        "value":"arn:aws:secretsmanager:us-east-1:043365517672:secret:MONGOURI-otxd4Z"
+      }],
       "mountPoints": [],
       "volumesFrom": []
     }
