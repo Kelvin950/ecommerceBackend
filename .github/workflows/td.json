@@ -16,11 +16,11 @@
         }
       ],
       "essential": true,
-      "environment": [],
-      "environmentFiles": [{
-        "name":"MONGO_URI" , 
-        "value":"arn:aws:secretsmanager:us-east-1:043365517672:secret:MONGOURI-otxd4Z"
+      "environment": [{
+        "name": "MONGO_URI",
+        "value": "arn:aws:secretsmanager:us-east-1:043365517672:secret:MONGOURI-otxd4Z"
       }],
+      "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": []
     }
