@@ -3,8 +3,9 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "",
-      "cpu": 0,
+      "image": "043365517672.dkr.ecr.us-east-1.amazonaws.com/app_repo",
+      "cpu": 256,
+      "memory": 512,
       "portMappings": [
         {
           "name": "cdsrccd-3001-tcp",
@@ -18,18 +19,7 @@
       "environment": [],
       "environmentFiles": [],
       "mountPoints": [],
-      "volumesFrom": [],
-      "ulimits": [],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-create-group": "true",
-          "awslogs-group": "/ecs/app",
-          "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "ecs"
-        },
-        "secretOptions": []
-      }
+      "volumesFrom": []
     }
   ],
   "family": "app",
